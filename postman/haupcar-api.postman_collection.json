@@ -1,0 +1,86 @@
+{
+  "info": {
+    "name": "Haupcar API",
+    "description": "REST API for managing company car records",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3033/api"
+    },
+    {
+      "key": "carId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Create car",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/cars",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"licensePlate\": \"กข 1234\",\n  \"brand\": \"Toyota\",\n  \"model\": \"Yaris\",\n  \"notes\": \"Company pool car\"\n}"
+        }
+      }
+    },
+    {
+      "name": "List cars",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const first = pm.response.json().data[0];",
+              "if (first) pm.collectionVariables.set('carId', first.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/cars"
+      }
+    },
+    {
+      "name": "Get car by id",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/cars/{{carId}}"
+      }
+    },
+    {
+      "name": "Update car",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/cars/{{carId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"notes\": \"Sent for maintenance\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Delete car",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/cars/{{carId}}"
+      }
+    }
+  ]
+}

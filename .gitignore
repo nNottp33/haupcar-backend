@@ -1,0 +1,27 @@
+# compiled output
+/dist
+/node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+
+# IDEs and editors
+/.idea
+*.launch
+.settings/
+
+# dotenv environment variable files
+.env
+.env.local
+
+# Prisma generated client
+/src/generated/prisma
